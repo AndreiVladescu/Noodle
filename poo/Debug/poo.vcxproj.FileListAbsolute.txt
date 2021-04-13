@@ -1,0 +1,3 @@
+C:\Users\Cosmin\Desktop\POOPR\poo\Debug\poo.exe
+C:\Users\Cosmin\Desktop\POOPR\poo\Debug\poo.pdb
+D:\Documents\Cursuri\Anul 2\Sem 2\Proiect POO\POOPR\poo\Debug\poo.exe
