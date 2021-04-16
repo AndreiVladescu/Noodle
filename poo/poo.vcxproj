@@ -142,6 +142,7 @@
     <ClInclude Include="Admin.h" />
     <ClInclude Include="AException.h" />
     <ClInclude Include="AUser.h" />
+    <ClInclude Include="Encryptor.h" />
     <ClInclude Include="FactoryQuestion.h" />
     <ClInclude Include="FactoryTest.h" />
     <ClInclude Include="FactoryUser.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="AException.cpp" />
     <ClCompile Include="AUser.cpp" />
+    <ClCompile Include="Encryptor.cpp" />
     <ClCompile Include="FactoryQuestion.cpp" />
     <ClCompile Include="FactoryTest.cpp" />
     <ClCompile Include="FactoryUser.cpp" />

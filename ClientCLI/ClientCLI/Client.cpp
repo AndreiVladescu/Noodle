@@ -1,6 +1,5 @@
 #include "Client.h"
 
-#define DEFAULT_IP "127.0.0.1"
 
 Client::Client(int argc, char** argv, int PORT)
 {
@@ -124,11 +123,13 @@ void Client::ClientHandler()
 
 }
 
-bool Client::SendString(const string& value)
+bool Client::SendString(string& value)
 {
 	int bufferLength = value.size();
 	if (!SendInt(bufferLength))
 		return false;
+
+	ENCRYPT->encrypt(value);
 
 	int returnCheck = send(ServerConnection, value.c_str(), bufferLength, NULL);
 	if (returnCheck == SOCKET_ERROR)
@@ -201,6 +202,8 @@ bool Client::GetString(std::string& value)
 
 	if (returnCheck == SOCKET_ERROR)
 		return false;
+
+	ENCRYPT->decrypt(value);
 
 	return true;
 }

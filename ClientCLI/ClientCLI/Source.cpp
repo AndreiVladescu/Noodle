@@ -19,6 +19,8 @@ using namespace std;
 void Auth()
 {
 	// Make client have a username
+	bool usernameReceived = false;
+	bool passwordReceived = false;
 	bool authAccepted = false;
 	do
 	{
@@ -27,15 +29,26 @@ void Auth()
 		getline(cin, str);
 		myClient->SendString(str);
 
-		myClient->GetBool(authAccepted);
-
+		if (!myClient->GetBool(usernameReceived)) {
+			cout << "Authentication failed. Leaving..." << endl;
+			exit(EXIT_FAILURE);
+		}
+		
 		cout << "Please provide a password" << endl;
 
 		getline(cin, str);
 		myClient->SendString(str);
 
-		myClient->GetBool(authAccepted);
+		if (!myClient->GetBool(passwordReceived)) {
+			cout << "Authentication failed. Leaving..." << endl;
+			exit(EXIT_FAILURE);
+		}
 
+		// verify authentification
+
+		if (!myClient->GetBool(authAccepted)) {
+			cout << "Password or Username incorrect." << endl;
+		}
 	} while (!authAccepted);
 }
 
@@ -64,11 +77,9 @@ int main(int argc, char** argv)
 	}
 
 	// cleanup
-	system("pause");
-
 	WSACleanup();
 
 	system("pause");
 
-	return 0;
+	exit(EXIT_SUCCESS);
 }

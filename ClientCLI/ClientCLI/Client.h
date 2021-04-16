@@ -7,23 +7,36 @@
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
+
 #include <iostream>
 #include <string>
 #include <thread>
 
+#include "Encryptor.h"
+
 using namespace std;
+
+#define DEFAULT_IP "127.0.0.1"
+#define ENCRYPT Encryptor::getInstance()
 
 class Client
 {
+private:
+	int iResult; // result of Socket
+	SOCKET ServerConnection; //conn
+	addrinfo* result = NULL;
+	addrinfo* ptr = NULL;
+	addrinfo hints;
+	thread clientThread; //threads
+
 public:
 	Client(int argc, char** argv, int PORT);
 	bool Connect();
 	inline void StartSubRoutine() { clientThread = thread(ClientHandler); }
 
-	bool SendString(const string& value);
+	bool SendString(string& value);
 	//bool SendDirectMessage(const string& value);
 	bool GetBool(bool& value);
-	bool DM_Failed;
 
 	static void ClientHandler();
 
@@ -33,12 +46,7 @@ public:
 	bool GetString(string& value);
 	bool CloseConnection();
 
-	int iResult;
-	SOCKET ServerConnection;
-	addrinfo* result = NULL;
-	addrinfo* ptr = NULL;
-	addrinfo hints;
-	std::thread clientThread;
+
 };
 
 static Client* clientPtr;

@@ -17,6 +17,11 @@
 
 using namespace std;
 
+enum class QueryDelimiter
+{
+    Space,
+    NewLine
+};
 
 class Query
 {
@@ -25,16 +30,21 @@ private:
     SQLHANDLE sqlStmtHandle;
     SQLHANDLE sqlEnvHandle;
     SQLWCHAR retconstring[SQL_RETURN_CODE_LEN];
+
+    void terminateQuery();
+    void initDelimiter(char& delimiter, QueryDelimiter);
+
 public:
 
     Query();
 
     string getAllUserNames();
-    string makeCustomQuery(const wchar_t* query, int column); //E.g. query: "SELECT * FROM Employees", /// column e coloana pe care o vreau
-    string authentifyUser(wstring mail_wstring, wstring password_wstring);
-    string makeRangeQuery(const wchar_t* query, int column_start, int column_finish);
+    string makeCustomQuery(const wchar_t* query, int column, QueryDelimiter query_delimiter = QueryDelimiter::Space); //E.g. query: "SELECT * FROM Employees", /// column e coloana pe care o vreau
+    //string authentifyUser(wstring mail_wstring, wstring password_wstring);
+    string makeRangedQuery(const wchar_t* query, int column_start, int column_finish, QueryDelimiter query_delimiter = QueryDelimiter::Space);
 
-    void insertNewStudent(wstring queryBuffer);//it must contain every column except UserID
+    void insertData(wstring);
+    //void insertNewStudent(wstring);//it must contain every column except UserID
 
     ~Query();
 };

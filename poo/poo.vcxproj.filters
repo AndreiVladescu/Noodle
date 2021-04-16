@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Hash">
       <UniqueIdentifier>{6537f418-fdd7-498e-977a-847c2fa143ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Encryption">
+      <UniqueIdentifier>{a2e13c8f-3ee1-4dca-b705-01453922eb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Encryption">
+      <UniqueIdentifier>{7e5b0eb9-9ae2-4440-bd6c-19960a195360}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IException.h">
@@ -138,6 +144,9 @@
     <ClInclude Include="Server.h">
       <Filter>Header Files\Server</Filter>
     </ClInclude>
+    <ClInclude Include="Encryptor.h">
+      <Filter>Header Files\Encryption</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IException.cpp">
@@ -214,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="Server.cpp">
       <Filter>Source Files\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Encryptor.cpp">
+      <Filter>Source Files\Encryption</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

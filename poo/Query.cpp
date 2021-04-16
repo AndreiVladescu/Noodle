@@ -1,40 +1,25 @@
 #include "Query.h"
 
+
 Query::Query()
 {
-
-}
-
-string Query::getAllUserNames()
-{
-    return makeCustomQuery(L"SELECT FirstName + ' ' + LastName FROM Users", 1);
-}
-
-string Query::authentifyUser(wstring mail_wstring, wstring password_wstring)
-{
-    wstring temp_wstring;
-    temp_wstring = L"SELECT * FROM Users WHERE PasswordHash = '" + password_wstring + L"' AND Email = '" + mail_wstring + L"'";
-    string tempStr = makeCustomQuery(temp_wstring.c_str(), 4);
-    tempStr += ' ' + makeCustomQuery(temp_wstring.c_str(), 5);
-    return tempStr;
-}
-
-string Query::makeRangeQuery(const wchar_t* query, int column_start, int column_finish)
-{
-    wstring ws; //= L"Select * from ";
-    string return_buffer;
-    ws += query;
 
     //initializations
     sqlConnHandle = NULL;
     sqlStmtHandle = NULL;
     //allocations
-    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &sqlEnvHandle))
-        goto COMPLETED;
-    if (SQL_SUCCESS != SQLSetEnvAttr(sqlEnvHandle, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0))
-        goto COMPLETED;
-    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_DBC, sqlEnvHandle, &sqlConnHandle))
-        goto COMPLETED;
+    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &sqlEnvHandle)) {
+        this->terminateQuery();
+        return;
+    }
+    if (SQL_SUCCESS != SQLSetEnvAttr(sqlEnvHandle, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0)) {
+        this->terminateQuery();
+        return;
+    }
+    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_DBC, sqlEnvHandle, &sqlConnHandle)) {
+        this->terminateQuery();
+        return;
+    }
     //output
     cout << "Attempting connection to SQL Server...";
     cout << "\n";
@@ -59,27 +44,50 @@ string Query::makeRangeQuery(const wchar_t* query, int column_start, int column_
     case SQL_INVALID_HANDLE:
         cout << "Could not connect to SQL Server";
         cout << "\n";
-        goto COMPLETED;
+        this->terminateQuery();
+        return;
+
     case SQL_ERROR:
         cout << "Could not connect to SQL Server";
         cout << "\n";
-        goto COMPLETED;
+        this->terminateQuery();
+        return;
+
     default:
         break;
     }
     //if there is a problem connecting then exit application
-    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle))
-        goto COMPLETED;
+    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle)) {
+        this->terminateQuery();
+    }
+    return;
     //output
     cout << "\n";
     cout << "Executing T-SQL query...";
     cout << "\n";
+}
+
+string Query::getAllUserNames()
+{
+    return makeCustomQuery(L"SELECT FirstName + ' ' + LastName FROM Users", 1 , QueryDelimiter::NewLine);
+}
+
+string Query::makeRangedQuery(const wchar_t* query, int column_start, int column_finish, QueryDelimiter query_delimiter)
+{
+    char delimiter;
+    initDelimiter(delimiter, query_delimiter);
+
+    wstring ws;
+    string return_buffer;
+    ws += query;
+
     //if there is a problem executing the query then exit application
     //else display query result
     if (SQL_SUCCESS != SQLExecDirect(sqlStmtHandle, (SQLWCHAR*)ws.c_str(), SQL_NTS)) {
         cout << "Error querying SQL Server";
         cout << "\n";
-        goto COMPLETED;
+        //this->terminateQuery();
+        return NULL;
     }
     else {
         //declare output variable and pointer
@@ -90,83 +98,32 @@ string Query::makeRangeQuery(const wchar_t* query, int column_start, int column_
             //template pentru ciclarea mai multor coloane
             for (int index = column_start; index < column_finish; index++) {
                 SQLGetData(sqlStmtHandle, index, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
-                return_buffer += (string((const char*)sqlVersion)) + " ";
+                return_buffer += (string((const char*)sqlVersion)) + delimiter;
             }
 
             //return_buffer += "\n";
         }
     }
     return return_buffer;
-    //close connection and free resources
-COMPLETED:
-    SQLFreeHandle(SQL_HANDLE_STMT, sqlStmtHandle);
-    SQLDisconnect(sqlConnHandle);
-    SQLFreeHandle(SQL_HANDLE_DBC, sqlConnHandle);
-    SQLFreeHandle(SQL_HANDLE_ENV, sqlEnvHandle);
-    return NULL;
 }
 
-string Query::makeCustomQuery(const wchar_t* query, int column)
+string Query::makeCustomQuery(const wchar_t* query, int column, QueryDelimiter query_delimiter)
 {
-    wstring ws; //= L"Select * from ";
+    char delimiter;
+    initDelimiter(delimiter, query_delimiter);
+
+    //ws is the wide string used for queries
+    wstring ws;
     string return_buffer;
     ws += query;
 
-    //initializations
-    sqlConnHandle = NULL;
-    sqlStmtHandle = NULL;
-    //allocations
-    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &sqlEnvHandle))
-        goto COMPLETED;
-    if (SQL_SUCCESS != SQLSetEnvAttr(sqlEnvHandle, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0))
-        goto COMPLETED;
-    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_DBC, sqlEnvHandle, &sqlConnHandle))
-        goto COMPLETED;
-    //output
-    cout << "Attempting connection to SQL Server...";
-    cout << "\n";
-    //connect to SQL Server  
-
-    switch (SQLDriverConnect(sqlConnHandle,
-        NULL,
-        (SQLWCHAR*)L"DRIVER={SQL Server};SERVER=localhost, 1433;DATABASE=Noodle;Trusted=true;", //Precizeaza baza de date / database-ul
-        SQL_NTS,
-        retconstring,
-        1024,
-        NULL,
-        SQL_DRIVER_NOPROMPT)) {
-    case SQL_SUCCESS:
-        cout << "Successfully connected to SQL Server";
-        cout << "\n";
-        break;
-    case SQL_SUCCESS_WITH_INFO:
-        cout << "Successfully connected to SQL Server";
-        cout << "\n";
-        break;
-    case SQL_INVALID_HANDLE:
-        cout << "Could not connect to SQL Server";
-        cout << "\n";
-        goto COMPLETED;
-    case SQL_ERROR:
-        cout << "Could not connect to SQL Server";
-        cout << "\n";
-        goto COMPLETED;
-    default:
-        break;
-    }
-    //if there is a problem connecting then exit application
-    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle))
-        goto COMPLETED;
-    //output
-    cout << "\n";
-    cout << "Executing T-SQL query...";
-    cout << "\n";
     //if there is a problem executing the query then exit application
     //else display query result
     if (SQL_SUCCESS != SQLExecDirect(sqlStmtHandle, (SQLWCHAR*)ws.c_str(), SQL_NTS)) {
         cout << "Error querying SQL Server";
         cout << "\n";
-        goto COMPLETED;
+        //this->terminateQuery();
+        return NULL;
     }
     else {
         //declare output variable and pointer
@@ -175,88 +132,60 @@ string Query::makeCustomQuery(const wchar_t* query, int column)
         SQLINTEGER ptrSqlVersion;
         while (SQLFetch(sqlStmtHandle) == SQL_SUCCESS) {
             SQLGetData(sqlStmtHandle, column, SQL_CHAR, sqlVersion, SQL_RESULT_LEN, &ptrSqlVersion);
-            return_buffer += (string((const char*)sqlVersion)) + '\n';
+            return_buffer += (string((const char*)sqlVersion)) + delimiter;
             //display query result
         }
     }
     return return_buffer;
-    //close connection and free resources
-COMPLETED:
-    SQLFreeHandle(SQL_HANDLE_STMT, sqlStmtHandle);
-    SQLDisconnect(sqlConnHandle);
-    SQLFreeHandle(SQL_HANDLE_DBC, sqlConnHandle);
-    SQLFreeHandle(SQL_HANDLE_ENV, sqlEnvHandle);
-    return NULL;
+   
 }
 
-
-
-void Query::insertNewStudent(wstring queryBuffer)
+void Query::insertData(wstring queryBuffer)
 {
-    wstring temp_wstring = L"USE Noodle INSERT INTO Users(LastName, FirstName, Email, PasswordHash, JoinDate, UserRole, StudyGroup, StudyYear) VALUES ";
-    temp_wstring += queryBuffer;
-
-    //initializations
-    sqlConnHandle = NULL;
-    sqlStmtHandle = NULL;
-    //allocations
-    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &sqlEnvHandle))
-        goto COMPLETED;
-    if (SQL_SUCCESS != SQLSetEnvAttr(sqlEnvHandle, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, 0))
-        goto COMPLETED;
-    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_DBC, sqlEnvHandle, &sqlConnHandle))
-        goto COMPLETED;
-    //output
-    cout << "Attempting connection to SQL Server...";
-    cout << "\n";
-    switch (SQLDriverConnect(sqlConnHandle,
-        NULL,
-        (SQLWCHAR*)L"DRIVER={SQL Server};SERVER=localhost, 1433;DATABASE=Noodle;Trusted=true;",
-        SQL_NTS,
-        retconstring,
-        1024,
-        NULL,
-        SQL_DRIVER_NOPROMPT)) {
-    case SQL_SUCCESS:
-        cout << "Successfully connected to SQL Server";
-        cout << "\n";
-        break;
-    case SQL_SUCCESS_WITH_INFO:
-        cout << "Successfully connected to SQL Server";
-        cout << "\n";
-        break;
-    case SQL_INVALID_HANDLE:
-        cout << "Could not connect to SQL Server";
-        cout << "\n";
-        goto COMPLETED;
-    case SQL_ERROR:
-        cout << "Could not connect to SQL Server";
-        cout << "\n";
-        goto COMPLETED;
-    default:
-        break;
-    }
-    //if there is a problem connecting then exit application
-    if (SQL_SUCCESS != SQLAllocHandle(SQL_HANDLE_STMT, sqlConnHandle, &sqlStmtHandle))
-        goto COMPLETED;
-    //output
-    cout << "\n";
-    cout << "Executing T-SQL query...";
-    cout << "\n";
-    //if there is a problem executing the query then exit application
-    //else display query result
     SQLExecDirect(sqlStmtHandle,
-        (SQLWCHAR*)temp_wstring.c_str(),
+        (SQLWCHAR*)queryBuffer.c_str(),
         SQL_NTS);
-COMPLETED:
+}
+
+//void Query::insertNewStudent(wstring queryBuffer)
+//{
+//    wstring temp_wstring = L"USE Noodle INSERT INTO Users(LastName, FirstName, Email, PasswordHash, JoinDate, UserRole, StudyGroup, StudyYear) VALUES ";
+//    temp_wstring += queryBuffer;
+//
+//    SQLExecDirect(sqlStmtHandle,
+//        (SQLWCHAR*)temp_wstring.c_str(),
+//        SQL_NTS);
+//}
+
+void Query::terminateQuery()
+{
+    //close connection and free resources
     SQLFreeHandle(SQL_HANDLE_STMT, sqlStmtHandle);
     SQLDisconnect(sqlConnHandle);
     SQLFreeHandle(SQL_HANDLE_DBC, sqlConnHandle);
     SQLFreeHandle(SQL_HANDLE_ENV, sqlEnvHandle);
-    //pause the console window - exit when key is pressed
+}
+
+void Query::initDelimiter(char& delimiter, QueryDelimiter queryDelimiter)
+{
+    switch (queryDelimiter){
+    case (QueryDelimiter::NewLine): {
+        delimiter = '\n';
+        break;
+    }
+    case (QueryDelimiter::Space): {
+        delimiter = ' ';
+        break;
+    }
+    default:
+    {
+        delimiter = ' ';
+    }
+    }
 }
 
 Query::~Query()
 {
-
+    //close connection and free resources
+    this->terminateQuery();
 }

@@ -13,21 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Client">
+      <UniqueIdentifier>{270d6cfe-5c91-4ece-9c90-9ac38de2d8f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Client">
+      <UniqueIdentifier>{34873cae-1379-4043-8a53-8f923b26e236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Encryptor">
+      <UniqueIdentifier>{a1489cbe-de7e-4943-ae53-c358461e2fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Encryptor">
+      <UniqueIdentifier>{cbc3040e-d21c-450b-8460-b2f756927f10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Client.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="Encryptor.cpp">
+      <Filter>Source Files\Encryptor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Client</Filter>
     </ClInclude>
-    <ClInclude Include="PACKETENUM.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Encryptor.h">
+      <Filter>Header Files\Encryptor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
