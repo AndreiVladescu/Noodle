@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminMainDialog</class>
+ <widget class="QDialog" name="AdminMainDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="WelcomeLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 18pt &quot;Times New Roman&quot;;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="manageUserAccount">
+     <property name="text">
+      <string>Add/ Delete user accounts</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="seeUserAccount">
+     <property name="text">
+      <string>See connected accounts</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="accountInfo">
+     <property name="text">
+      <string>Account info</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="changePassword">
+     <property name="text">
+      <string>Change account password</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item alignment="Qt::AlignRight">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Log out</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
