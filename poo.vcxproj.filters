@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Exception">
+      <UniqueIdentifier>{cbcf3b92-e500-4b34-8982-ad2d5aa97cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exception">
+      <UniqueIdentifier>{899791e3-1881-4f0f-88b6-b235910be00d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Users">
+      <UniqueIdentifier>{e7e4ba28-60e6-4284-8fc3-c8f0bf633566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Users">
+      <UniqueIdentifier>{63c45660-77d4-48f3-bc11-123e31157a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Server">
+      <UniqueIdentifier>{aae88a38-5962-4943-b8f7-d533f12eee49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Server">
+      <UniqueIdentifier>{51711264-0e1c-4402-8273-a2f2210a04fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Test">
+      <UniqueIdentifier>{db2f481d-80c3-42e2-b9e0-004e4b55aa08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Question">
+      <UniqueIdentifier>{3945520b-6e6a-4edf-b1f4-ae845ae42c4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{52d0556d-b956-463a-99dc-f6958e7fd9ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Question">
+      <UniqueIdentifier>{171b18ba-847a-475b-ac5f-5515d4e112f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Trustedtime">
+      <UniqueIdentifier>{34c2672c-abd3-4015-a019-51033868ae5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Trustedtime">
+      <UniqueIdentifier>{46724b25-a680-4223-8b5d-6637eb3139c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SQL">
+      <UniqueIdentifier>{1199de0c-e286-40ca-a702-5ae578c3fd29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SQL">
+      <UniqueIdentifier>{ff8b0ca0-eaf8-44b0-bdb3-276ff93f9b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Hash">
+      <UniqueIdentifier>{365483a4-aa3f-4baa-b5a0-ae9d6c1cbb20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hash">
+      <UniqueIdentifier>{6537f418-fdd7-498e-977a-847c2fa143ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Encryption">
+      <UniqueIdentifier>{a2e13c8f-3ee1-4dca-b705-01453922eb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Encryption">
+      <UniqueIdentifier>{7e5b0eb9-9ae2-4440-bd6c-19960a195360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Parser">
+      <UniqueIdentifier>{ab417b34-0d20-474e-a426-28d7626e302d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Parser">
+      <UniqueIdentifier>{7fcd34d8-fe53-474e-b16b-83d25ec89a0f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IException.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="AException.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerException.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestionException.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="SQLMException.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="TestException.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="UserException.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="IUser.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="AUser.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="Profesor.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="Student.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="Admin.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryUser.h">
+      <Filter>Header Files\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="ITest.h">
+      <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryTest.h">
+      <Filter>Header Files\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="IQuestion.h">
+      <Filter>Header Files\Question</Filter>
+    </ClInclude>
+    <ClInclude Include="Question.h">
+      <Filter>Header Files\Question</Filter>
+    </ClInclude>
+    <ClInclude Include="FactoryQuestion.h">
+      <Filter>Header Files\Question</Filter>
+    </ClInclude>
+    <ClInclude Include="TrustedTime.h">
+      <Filter>Header Files\Trustedtime</Filter>
+    </ClInclude>
+    <ClInclude Include="SQLManager.h">
+      <Filter>Header Files\SQL</Filter>
+    </ClInclude>
+    <ClInclude Include="PswdHash.h">
+      <Filter>Header Files\Hash</Filter>
+    </ClInclude>
+    <ClInclude Include="Query.h">
+      <Filter>Header Files\SQL</Filter>
+    </ClInclude>
+    <ClInclude Include="IServer.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Encryptor.h">
+      <Filter>Header Files\Encryption</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Header Files\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionCode.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenEndedQuestion.h">
+      <Filter>Header Files\Question</Filter>
+    </ClInclude>
+    <ClInclude Include="MultipleChoiceQuestion.h">
+      <Filter>Header Files\Question</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.h">
+      <Filter>Header Files\Server</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AException.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestionException.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerException.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="SQLMException.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="TestException.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="UserException.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="AUser.cpp">
+      <Filter>Source Files\Users</Filter>
+    </ClCompile>
+    <ClCompile Include="Student.cpp">
+      <Filter>Source Files\Users</Filter>
+    </ClCompile>
+    <ClCompile Include="Profesor.cpp">
+      <Filter>Source Files\Users</Filter>
+    </ClCompile>
+    <ClCompile Include="Admin.cpp">
+      <Filter>Source Files\Users</Filter>
+    </ClCompile>
+    <ClCompile Include="FactoryUser.cpp">
+      <Filter>Source Files\Users</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="FactoryTest.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Question.cpp">
+      <Filter>Source Files\Question</Filter>
+    </ClCompile>
+    <ClCompile Include="FactoryQuestion.cpp">
+      <Filter>Source Files\Question</Filter>
+    </ClCompile>
+    <ClCompile Include="TrustedTime.cpp">
+      <Filter>Source Files\Trustedtime</Filter>
+    </ClCompile>
+    <ClCompile Include="SQLManager.cpp">
+      <Filter>Source Files\SQL</Filter>
+    </ClCompile>
+    <ClCompile Include="PswdHash.cpp">
+      <Filter>Source Files\Hash</Filter>
+    </ClCompile>
+    <ClCompile Include="Query.cpp">
+      <Filter>Source Files\SQL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+      <Filter>Source Files\Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Encryptor.cpp">
+      <Filter>Source Files\Encryption</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Source Files\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="MultipleChoiceQuestion.cpp">
+      <Filter>Source Files\Question</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenEndedQuestion.cpp">
+      <Filter>Source Files\Question</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol.cpp">
+      <Filter>Source Files\Server</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
